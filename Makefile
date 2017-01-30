@@ -5,14 +5,14 @@
 ## Login   <jacqui_p@epitech.eu>
 ##
 ## Started on  Mon Jan 30 10:56:43 2017 Pierre-Emmanuel Jacquier
-## Last update Mon Jan 30 11:20:10 2017 Pierre-Emmanuel Jacquier
+## Last update Mon Jan 30 11:23:26 2017 Pierre-Emmanuel Jacquier
 ##
 
 CC	= cc
 
 RM	= rm -f
 
-CFLAGS	+= -I.
+CFLAGS	+= -I. -Wall -Wextra
 
 NAME	= libmy_malloc.so
 
