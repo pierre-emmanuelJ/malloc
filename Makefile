@@ -5,7 +5,7 @@
 ## Login   <jacqui_p@epitech.eu>
 ##
 ## Started on  Mon Jan 30 10:56:43 2017 Pierre-Emmanuel Jacquier
-## Last update Mon Jan 30 11:11:38 2017 Pierre-Emmanuel Jacquier
+## Last update Mon Jan 30 11:20:10 2017 Pierre-Emmanuel Jacquier
 ##
 
 CC	= cc
@@ -25,8 +25,7 @@ OBJS	= $(SRCS:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	ar rc $(NAME) $(OBJS)
-	ranlib $(NAME)
+	$(CC) -shared -o $(NAME) -fPIC $(OBJS)
 
 clean:
 	$(RM) $(OBJS)
