@@ -5,7 +5,7 @@
 ** Login   <jacqui_p@epitech.eu>
 **
 ** Started on  Mon Jan 30 11:05:54 2017 Pierre-Emmanuel Jacquier
-** Last update Tue Jan 31 17:28:15 2017 Pierre-Emmanuel Jacquier
+** Last update Wed Feb  1 11:17:36 2017 Pierre-Emmanuel Jacquier
 */
 
 #ifndef MALLOC_H_
@@ -18,7 +18,7 @@ typedef struct          s_memblock
   size_t                memsize;
   struct s_memblock     *next;
   struct s_memblock     *prev;
-  int                 isfree;
+  double                 isfree;
 }                       t_memblock;
 
 extern t_memblock *g_head;

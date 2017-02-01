@@ -6,7 +6,7 @@
 ** Login   <jacqui_p@epitech.eu>
 **
 ** Started on  Mon Jan 30 10:57:50 2017 Pierre-Emmanuel Jacquier
-** Last update Wed Feb  1 11:04:36 2017 Pierre-Emmanuel Jacquier
+** Last update Wed Feb  1 12:43:38 2017 Pierre-Emmanuel Jacquier
 */
 
 #include "malloc.h"
@@ -41,7 +41,7 @@ void          *check_block(t_memblock *head, size_t size)
   if (!head)
     return (NULL);
   tmp = head;
-  while(tmp->next)
+  while(tmp)
     {
       if (tmp->memsize >= size && tmp->isfree)
         return (tmp);
@@ -99,6 +99,8 @@ void			*_malloc(size_t size)
 {
   t_memblock *block;
 
+  if (!size)
+    return (NULL);
   if (!g_head)
     {
       printf("%s\n", "La métaleuse");
@@ -150,7 +152,7 @@ int i = 0;
 	      }
       test[j] = 0;
       printf("%s\n", test);
-      //_free(test);
+      _free(test);
       i++;
     }
   test = _malloc(1000);
