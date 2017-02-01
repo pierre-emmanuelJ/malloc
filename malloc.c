@@ -6,12 +6,15 @@
 ** Login   <jacqui_p@epitech.eu>
 **
 ** Started on  Mon Jan 30 10:57:50 2017 Pierre-Emmanuel Jacquier
-** Last update Tue Jan 31 15:03:46 2017 Pierre-Emmanuel Jacquier
+** Last update Wed Feb  1 11:04:36 2017 Pierre-Emmanuel Jacquier
 */
 
 #include "malloc.h"
 
+#include "free.h"
 #include <stdio.h>
+
+t_memblock *g_head = NULL;
 
 size_t to_alloc(size_t size)
 {
@@ -35,6 +38,8 @@ void          *check_block(t_memblock *head, size_t size)
 {
   t_memblock  *tmp;
 
+  if (!head)
+    return (NULL);
   tmp = head;
   while(tmp->next)
     {
@@ -55,7 +60,9 @@ void	split_block(t_memblock *block, size_t size)
   new_data_block += (size + sizeof(t_memblock));
   ((t_memblock *)new_data_block)->next = block->next;
   ((t_memblock *)new_data_block)->prev = block;
+  block->isfree = 0;
   block->next = (t_memblock *)new_data_block;
+  block->next->isfree = 1;
   block->memsize = size;
   block->next->memsize  = old_size - size;
 }
@@ -90,12 +97,23 @@ void          *add_block(t_memblock *head, size_t size)
 
 void			*_malloc(size_t size)
 {
-  static	t_memblock *head = NULL;
+  t_memblock *block;
 
-  if (!head)
+  if (!g_head)
     {
+      printf("%s\n", "La métaleuse");
+      block = add_block(g_head, size);
+      g_head = block - 1;
+      return (block);
     }
-  return NULL;
+  printf("%s\n", "check_block");
+  if ((block = check_block(g_head, size)))
+    {
+      split_block(block, size);
+      return block + 1;
+    }
+  printf("%s\n", "add block after check");
+  return (add_block(g_head, size));
 }
 
 int main()
@@ -109,6 +127,42 @@ int main()
   // test[5] = 0;
   // test[6] = 0;
 
+test = _malloc(sizeof(char) * 10000);
+int i = 0;
+  while (i < 10000)
+    {
+      test[i] = 'O';
+      i++;
+    }
+  test[i - 1] = 0;
 
+  _free(test);
+
+  i = 1;
+  while (i <= 10)
+    {
+      test = _malloc(i + 1);
+      int j = 0;
+      while(j < i)
+	      {
+	        test[j] = 'A';
+	        j++;
+	      }
+      test[j] = 0;
+      printf("%s\n", test);
+      //_free(test);
+      i++;
+    }
+  test = _malloc(1000);
+  test[1000 - 1] = 0;
+  i = 0;
+  while(i < 1000)
+    {
+      test[i] = 'T';
+      i++;
+    }
+  test[i - 1] = 0;
+  printf("%s\n", test);
+  //printf("%s\n", test);
 //  printf("%s\n", test);
 }

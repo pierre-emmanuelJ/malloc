@@ -5,14 +5,14 @@
 ## Login   <jacqui_p@epitech.eu>
 ##
 ## Started on  Mon Jan 30 10:56:43 2017 Pierre-Emmanuel Jacquier
-## Last update Mon Jan 30 11:23:26 2017 Pierre-Emmanuel Jacquier
+## Last update Tue Jan 31 16:03:38 2017 Pierre-Emmanuel Jacquier
 ##
 
-CC	= cc
+CC	= gcc
 
 RM	= rm -f
 
-CFLAGS	+= -I. -Wall -Wextra
+CFLAGS	+= -I. -fPIC -Wall -Wextra
 
 NAME	= libmy_malloc.so
 
@@ -25,7 +25,7 @@ OBJS	= $(SRCS:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) -shared -o $(NAME) -fPIC $(OBJS)
+	$(CC) -shared -o $(NAME) $(OBJS)
 
 clean:
 	$(RM) $(OBJS)

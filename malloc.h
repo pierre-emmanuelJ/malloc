@@ -5,7 +5,7 @@
 ** Login   <jacqui_p@epitech.eu>
 **
 ** Started on  Mon Jan 30 11:05:54 2017 Pierre-Emmanuel Jacquier
-** Last update Tue Jan 31 13:45:58 2017 Pierre-Emmanuel Jacquier
+** Last update Tue Jan 31 17:28:15 2017 Pierre-Emmanuel Jacquier
 */
 
 #ifndef MALLOC_H_
@@ -18,8 +18,10 @@ typedef struct          s_memblock
   size_t                memsize;
   struct s_memblock     *next;
   struct s_memblock     *prev;
-  short                 isfree;
+  int                 isfree;
 }                       t_memblock;
+
+extern t_memblock *g_head;
 
 void    *_malloc(size_t size);
 size_t  to_alloc(size_t size);
