@@ -5,21 +5,23 @@
 ** Login   <jacqui_p@epitech.eu>
 **
 ** Started on  Mon Jan 30 11:07:14 2017 Pierre-Emmanuel Jacquier
-** Last update Wed Feb  1 12:35:21 2017 Pierre-Emmanuel Jacquier
+** Last update Thu Feb  2 14:22:36 2017 Pierre-Emmanuel Jacquier
 */
 
 #include "free.h"
 
-void	_free(void *ptr)
+void	free(void *ptr)
 {
   t_memblock *tmp;
 
   if (!ptr)
     return ;
+  if (ptr > sbrk(0) || ptr < (void*)g_head)
+    return ;
   tmp = (t_memblock *)ptr;
   tmp = tmp -1;
   tmp->isfree = 1;
-  block_fusion(tmp);
+  //block_fusion(tmp);
 }
 
 void	block_fusion(t_memblock *block)

@@ -5,7 +5,7 @@
 ** Login   <jacqui_p@epitech.eu>
 **
 ** Started on  Mon Jan 30 11:06:09 2017 Pierre-Emmanuel Jacquier
-** Last update Wed Feb  1 11:31:06 2017 Pierre-Emmanuel Jacquier
+** Last update Wed Feb  1 14:53:39 2017 Pierre-Emmanuel Jacquier
 */
 
 #ifndef FREE_H_
@@ -15,6 +15,6 @@
 #include "malloc.h"
 
 void	block_fusion(t_memblock *block);
-void	_free(void *ptr);
+void	free(void *ptr);
 
 #endif /* !FREE_H_ */
