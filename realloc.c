@@ -5,7 +5,7 @@
 ** Login   <jacqui_p@epitech.eu>
 **
 ** Started on  Mon Jan 30 11:07:21 2017 Pierre-Emmanuel Jacquier
-** Last update Tue Feb  7 15:12:01 2017 Pierre-Emmanuel Jacquier
+** Last update Tue Feb  7 17:50:57 2017 Pierre-Emmanuel Jacquier
 */
 
 #include <string.h>
@@ -33,4 +33,16 @@ void	*realloc(void *ptr, size_t size)
   new_ptr = new_ptr + 1;
   free(ptr);
   return (new_ptr);
+}
+
+void *calloc(size_t nelem, size_t elsize)
+{
+	void *p;
+
+	p = malloc (nelem * elsize);
+	if (p == 0)
+		return (p);
+
+	bzero (p, nelem * elsize);
+	return (p);
 }
