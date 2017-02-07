@@ -5,21 +5,19 @@
 ** Login   <jacqui_p@epitech.eu>
 **
 ** Started on  Mon Jan 30 11:05:54 2017 Pierre-Emmanuel Jacquier
-** Last update Thu Feb  2 15:04:08 2017 Pierre-Emmanuel Jacquier
+** Last update Tue Feb  7 15:24:02 2017 Pierre-Emmanuel Jacquier
 */
 
 #ifndef MALLOC_H_
 # define MALLOC_H_
 
 # include <unistd.h>
-
-//#include "./my_printf/my_printf.h"
+#include <stdio.h>
 
 typedef struct          s_memblock
 {
   size_t                memsize;
   struct s_memblock     *next;
-  char                momo;
   struct s_memblock     *prev;
   size_t                isfree;
 }                       t_memblock;
