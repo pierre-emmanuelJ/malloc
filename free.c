@@ -5,7 +5,7 @@
 ** Login   <jacqui_p@epitech.eu>
 **
 ** Started on  Mon Jan 30 11:07:14 2017 Pierre-Emmanuel Jacquier
-** Last update Wed Feb  8 11:55:26 2017 Pierre-Emmanuel Jacquier
+** Last update Wed Feb  8 14:57:58 2017 Pierre-Emmanuel Jacquier
 */
 
 #include "free.h"
@@ -16,12 +16,12 @@ void	free(void *ptr)
 
   if (!ptr)
     return ;
-  if (ptr > sbrk(0) || ptr < (void*)g_head)
-    return ;
+  // if (ptr > sbrk(0) || ptr < (void*)g_head)
+  //   return ;
   tmp = (t_memblock *)ptr;
   tmp = tmp -1;
   tmp->isfree = 1;
-  block_fusion(tmp);
+//  block_fusion(tmp);
 }
 
 void	block_fusion(t_memblock *block)
@@ -37,7 +37,7 @@ void	block_fusion(t_memblock *block)
     }
   if (block->next && block->next->isfree)
     {
-      // write(1, "je fusionne avec next\n", 22);
+//       write(1, "je fusionne avec next\n", 22);
       block->memsize = block->memsize + block->next->memsize + sizeof(t_memblock);
       block->next = block->next->next;
       if (block->next)

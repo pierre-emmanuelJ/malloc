@@ -6,7 +6,7 @@
 ** Login   <jacqui_p@epitech.eu>
 **
 ** Started on  Mon Jan 30 10:57:50 2017 Pierre-Emmanuel Jacquier
-** Last update Tue Feb  7 20:32:49 2017 Pierre-Emmanuel Jacquier
+** Last update Wed Feb  8 14:45:39 2017 Pierre-Emmanuel Jacquier
 */
 
 #include "malloc.h"
@@ -52,6 +52,11 @@ void	split_block(t_memblock *block, size_t size)
   char *new_data_block;
   size_t old_size;
 
+  if (block->memsize == size || (block->memsize - size) <= sizeof(t_memblock))
+    {
+      block->isfree = 0;
+      return ;
+    }
   old_size = block->memsize;
   new_data_block = (char *)block;
   new_data_block += (size + sizeof(t_memblock));
@@ -78,7 +83,7 @@ void          *add_block(t_memblock *head, size_t size)
       tmp->prev = NULL;
       tmp->memsize = size;
       tmp->isfree = 0;
-      return (tmp + 1);
+      return (tmp);
     }
   while(tmp->next)
     tmp = tmp->next;
@@ -90,36 +95,32 @@ void          *add_block(t_memblock *head, size_t size)
   tmp->next->next = NULL;
   tmp->next->memsize = size;
   tmp->next->isfree = 0;
-  return ((tmp->next) + 1);
+  return (tmp->next);
 }
 
 void			*malloc(size_t size)
 {
   t_memblock *block;
+  size_t     alloc_size;
 
-  block = NULL;
   if (!size)
     return (NULL);
+  size = (size -1) / 4 * 4 + 4;
+  alloc_size = to_alloc(size);
+  block = NULL;
   if (!g_head)
     {
-      block = add_block(g_head, size);
-      g_head = block - 1;
-      return (block);
+      block = add_block(g_head, alloc_size);
+      split_block(block, size);
+      g_head = block;
+      return (block + 1);
     }
   if ((block = check_block(g_head, size)))
     {
-      if (block->memsize == size)
-	      {
-	        block->isfree = 0;
-	        return (block + 1);
-	      }
-      if ((block->memsize - size) <= sizeof(t_memblock))
-	      {
-	        block->isfree = 0;
-	        return (block + 1);
-	      }
       split_block(block, size);
       return block + 1;
     }
-  return (add_block(g_head, size));
+    block = add_block(g_head, alloc_size);
+    split_block(block, size);
+    return (block + 1);
 }

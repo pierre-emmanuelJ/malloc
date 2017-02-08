@@ -5,7 +5,7 @@
 ** Login   <jacqui_p@epitech.eu>
 **
 ** Started on  Mon Jan 30 11:07:21 2017 Pierre-Emmanuel Jacquier
-** Last update Tue Feb  7 20:32:44 2017 Pierre-Emmanuel Jacquier
+** Last update Wed Feb  8 13:19:40 2017 Pierre-Emmanuel Jacquier
 */
 
 #include <string.h>
@@ -29,8 +29,6 @@ void	*realloc(void *ptr, size_t size)
   if (!(new_ptr = malloc(sizeblock + size)))
     return (NULL);
   memmove(new_ptr, ptr, sizeblock);
-  new_ptr = new_ptr - 1;
-  new_ptr = new_ptr + 1;
   free(ptr);
   return (new_ptr);
 }
