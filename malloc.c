@@ -6,7 +6,7 @@
 ** Login   <jacqui_p@epitech.eu>
 **
 ** Started on  Mon Jan 30 10:57:50 2017 Pierre-Emmanuel Jacquier
-** Last update Wed Feb  8 14:45:39 2017 Pierre-Emmanuel Jacquier
+** Last update Wed Feb  8 15:38:26 2017 Pierre-Emmanuel Jacquier
 */
 
 #include "malloc.h"
@@ -18,7 +18,7 @@ size_t to_alloc(size_t size)
   size_t	nb;
   size_t page_alloc;
 
-  page_alloc = sysconf(_SC_PAGESIZE);
+  page_alloc = sysconf(_SC_PAGESIZE); //524288;
   if (size < page_alloc);
   else
     {
@@ -106,7 +106,7 @@ void			*malloc(size_t size)
   if (!size)
     return (NULL);
   size = (size -1) / 4 * 4 + 4;
-  alloc_size = to_alloc(size);
+  alloc_size = to_alloc(size); //page size 4096
   block = NULL;
   if (!g_head)
     {

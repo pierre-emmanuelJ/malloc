@@ -5,7 +5,7 @@
 ** Login   <jacqui_p@epitech.eu>
 **
 ** Started on  Mon Jan 30 11:07:14 2017 Pierre-Emmanuel Jacquier
-** Last update Wed Feb  8 14:57:58 2017 Pierre-Emmanuel Jacquier
+** Last update Wed Feb  8 17:38:09 2017 Pierre-Emmanuel Jacquier
 */
 
 #include "free.h"
@@ -21,20 +21,20 @@ void	free(void *ptr)
   tmp = (t_memblock *)ptr;
   tmp = tmp -1;
   tmp->isfree = 1;
-//  block_fusion(tmp);
+  block_fusion(tmp);
 }
 
 void	block_fusion(t_memblock *block)
 {
-  if (block->prev && block->prev->isfree)
-    {
-      //write(1, "je fusionne avec prev\n", 22);
-      block->prev->memsize = (block->memsize + block->prev->memsize + sizeof(t_memblock));
-      block->prev->next = block->next;
-      if (block->next)
-        block->next->prev = block->prev;
-      block = block->prev;
-    }
+  // if (block->prev && block->prev->isfree)
+  //   {
+  //     //write(1, "je fusionne avec prev\n", 22);
+  //     block->prev->memsize = (block->memsize + block->prev->memsize + sizeof(t_memblock));
+  //     block->prev->next = block->next;
+  //     if (block->next)
+  //       block->next->prev = block->prev;
+  //     block = block->prev;
+  //   }
   if (block->next && block->next->isfree)
     {
 //       write(1, "je fusionne avec next\n", 22);
