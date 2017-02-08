@@ -5,7 +5,7 @@
 ** Login   <jacqui_p@epitech.eu>
 **
 ** Started on  Mon Jan 30 11:07:21 2017 Pierre-Emmanuel Jacquier
-** Last update Tue Feb  7 17:50:57 2017 Pierre-Emmanuel Jacquier
+** Last update Tue Feb  7 20:32:44 2017 Pierre-Emmanuel Jacquier
 */
 
 #include <string.h>
@@ -37,12 +37,11 @@ void	*realloc(void *ptr, size_t size)
 
 void *calloc(size_t nelem, size_t elsize)
 {
-	void *p;
+	void *ptr;
 
-	p = malloc (nelem * elsize);
-	if (p == 0)
-		return (p);
-
-	bzero (p, nelem * elsize);
-	return (p);
+	ptr = malloc(nelem * elsize);
+	if (ptr == 0)
+		return (ptr);
+	bzero(ptr, nelem * elsize);
+	return (ptr);
 }
