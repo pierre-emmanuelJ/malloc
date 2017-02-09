@@ -6,7 +6,7 @@
 ** Login   <jacqui_p@epitech.eu>
 **
 ** Started on  Mon Jan 30 10:57:50 2017 Pierre-Emmanuel Jacquier
-** Last update Wed Feb  8 15:38:26 2017 Pierre-Emmanuel Jacquier
+** Last update Thu Feb  9 13:49:46 2017 Pierre-Emmanuel Jacquier
 */
 
 #include "malloc.h"
@@ -61,12 +61,15 @@ void	split_block(t_memblock *block, size_t size)
   new_data_block = (char *)block;
   new_data_block += (size + sizeof(t_memblock));
   ((t_memblock *)new_data_block)->next = block->next;
+
   ((t_memblock *)new_data_block)->prev = block;
   block->isfree = 0;
   block->next = (t_memblock *)new_data_block;
   block->next->isfree = 1;
   block->memsize = size;
   block->next->memsize  = old_size - size - sizeof(t_memblock);
+  if (block->next->next)
+    block->next->next->prev = block->next;
 }
 
 void          *add_block(t_memblock *head, size_t size)
