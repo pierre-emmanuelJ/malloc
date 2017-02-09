@@ -5,7 +5,7 @@
 ## Login   <jacqui_p@epitech.eu>
 ##
 ## Started on  Mon Jan 30 10:56:43 2017 Pierre-Emmanuel Jacquier
-## Last update Tue Feb  7 18:00:52 2017 Pierre-Emmanuel Jacquier
+## Last update Thu Feb  9 14:24:47 2017 Pierre-Emmanuel Jacquier
 ##
 
 CC	= gcc
@@ -17,6 +17,7 @@ CFLAGS	+= -I. -fPIC -Wall -Wextra
 NAME	= libmy_malloc.so
 
 SRCS	= malloc.c \
+				calloc.c \
 				realloc.c \
 				free.c
 

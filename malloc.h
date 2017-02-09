@@ -5,7 +5,7 @@
 ** Login   <jacqui_p@epitech.eu>
 **
 ** Started on  Mon Jan 30 11:05:54 2017 Pierre-Emmanuel Jacquier
-** Last update Tue Feb  7 20:32:20 2017 Pierre-Emmanuel Jacquier
+** Last update Thu Feb  9 14:21:31 2017 Pierre-Emmanuel Jacquier
 */
 
 #ifndef MALLOC_H_
@@ -25,7 +25,6 @@ typedef struct          s_memblock
 extern t_memblock *g_head;
 
 void    *malloc(size_t size);
-void    *calloc(size_t nelem, size_t elsize);
 size_t  to_alloc(size_t size);
 void    *add_block(t_memblock *head, size_t size);
 void    *check_block(t_memblock *head, size_t size);
