@@ -11,13 +11,13 @@
 #include "calloc.h"
 #include <string.h>
 
-void *calloc(size_t nelem, size_t elsize)
+void    *calloc(size_t nelem, size_t elsize)
 {
-	void *ptr;
+  void  *ptr;
 
-	ptr = malloc(nelem * elsize);
-	if (ptr == 0)
-		return (ptr);
-	bzero(ptr, nelem * elsize);
-	return (ptr);
+  ptr = malloc(nelem * elsize);
+  if (ptr == 0)
+    return (ptr);
+  bzero(ptr, nelem * elsize);
+  return (ptr);
 }

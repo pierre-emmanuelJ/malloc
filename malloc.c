@@ -1,4 +1,3 @@
-
 /*
 ** malloc.c for  in /home/jacqui_p/rendu/PSU_2016_malloc/
 **
@@ -6,20 +5,25 @@
 ** Login   <jacqui_p@epitech.eu>
 **
 ** Started on  Mon Jan 30 10:57:50 2017 Pierre-Emmanuel Jacquier
-** Last update Thu Feb  9 13:49:46 2017 Pierre-Emmanuel Jacquier
+** Last update Thu Feb  9 16:13:01 2017 Pierre-Emmanuel Jacquier
 */
 
 #include "malloc.h"
 
-t_memblock *g_head = NULL;
+t_memblock      *g_head = NULL;
 
-size_t to_alloc(size_t size)
+/*
+** 524288;
+*/
+size_t          to_alloc(size_t size)
 {
-  size_t	nb;
-  size_t page_alloc;
+  size_t        nb;
+  size_t        page_alloc;
 
-  page_alloc = sysconf(_SC_PAGESIZE); //524288;
-  if (size < page_alloc);
+  page_alloc = sysconf(_SC_PAGESIZE);
+  if (size < page_alloc)
+    {
+    }
   else
     {
       nb = size / page_alloc;
@@ -28,29 +32,29 @@ size_t to_alloc(size_t size)
       else
         page_alloc = page_alloc * nb;
     }
-  return page_alloc;
+  return (page_alloc);
 }
 
-void          *check_block(t_memblock *head, size_t size)
+void            *check_block(t_memblock *head, size_t size)
 {
-  t_memblock  *tmp;
+  t_memblock    *tmp;
 
   if (!head)
     return (NULL);
   tmp = head;
-  while(tmp)
+  while (tmp)
     {
       if (tmp->memsize >= size && tmp->isfree)
-	      return (tmp);
+        return (tmp);
       tmp = tmp->next;
     }
   return (NULL);
 }
 
-void	split_block(t_memblock *block, size_t size)
+void            split_block(t_memblock *block, size_t size)
 {
-  char *new_data_block;
-  size_t old_size;
+  char          *new_data_block;
+  size_t        old_size;
 
   if (block->memsize == size || (block->memsize - size) <= sizeof(t_memblock))
     {
@@ -61,20 +65,19 @@ void	split_block(t_memblock *block, size_t size)
   new_data_block = (char *)block;
   new_data_block += (size + sizeof(t_memblock));
   ((t_memblock *)new_data_block)->next = block->next;
-
   ((t_memblock *)new_data_block)->prev = block;
   block->isfree = 0;
   block->next = (t_memblock *)new_data_block;
   block->next->isfree = 1;
   block->memsize = size;
-  block->next->memsize  = old_size - size - sizeof(t_memblock);
+  block->next->memsize = old_size - size - sizeof(t_memblock);
   if (block->next->next)
     block->next->next->prev = block->next;
 }
 
-void          *add_block(t_memblock *head, size_t size)
+void            *add_block(t_memblock *head, size_t size)
 {
-  t_memblock  *tmp;
+  t_memblock    *tmp;
 
   tmp = head;
   if (!tmp)
@@ -88,9 +91,8 @@ void          *add_block(t_memblock *head, size_t size)
       tmp->isfree = 0;
       return (tmp);
     }
-  while(tmp->next)
+  while (tmp->next)
     tmp = tmp->next;
-
   tmp->next = sbrk(0);
   if (sbrk(sizeof(t_memblock) + to_alloc(size)) == (void*)-1)
     return (NULL);
@@ -101,15 +103,15 @@ void          *add_block(t_memblock *head, size_t size)
   return (tmp->next);
 }
 
-void			*malloc(size_t size)
+void            *malloc(size_t size)
 {
-  t_memblock *block;
-  size_t     alloc_size;
+  t_memblock    *block;
+  size_t        alloc_size;
 
   if (!size)
     return (NULL);
-  size = (size -1) / 4 * 4 + 4;
-  alloc_size = to_alloc(size); //page size 4096
+  size = (size - 1) / 4 * 4 + 4;
+  alloc_size = to_alloc(size);
   block = NULL;
   if (!g_head)
     {
@@ -121,9 +123,9 @@ void			*malloc(size_t size)
   if ((block = check_block(g_head, size)))
     {
       split_block(block, size);
-      return block + 1;
+      return (block + 1);
     }
-    block = add_block(g_head, alloc_size);
-    split_block(block, size);
-    return (block + 1);
+  block = add_block(g_head, alloc_size);
+  split_block(block, size);
+  return (block + 1);
 }

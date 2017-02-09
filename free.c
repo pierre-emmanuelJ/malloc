@@ -10,35 +10,37 @@
 
 #include "free.h"
 
-void	free(void *ptr)
+void            free(void *ptr)
 {
-  t_memblock *tmp;
+  t_memblock    *tmp;
 
   if (!ptr)
     return ;
   if (ptr > sbrk(0) || ptr < (void*)g_head)
     return ;
   tmp = (t_memblock *)ptr;
-  tmp = tmp -1;
+  tmp = tmp - 1;
   tmp->isfree = 1;
   block_fusion(tmp);
 }
 
-void	block_fusion(t_memblock *block)
+void    block_fusion(t_memblock *block)
 {
   if (block->prev && block->prev->isfree)
-  {
-    block->prev->memsize = (block->memsize + block->prev->memsize + sizeof(t_memblock));
-    block->prev->next = block->next;
-    if (block->next)
-    block->next->prev = block->prev;
-    block = block->prev;
-  }
+    {
+      block->prev->memsize = (block->memsize +
+                              block->prev->memsize + sizeof(t_memblock));
+      block->prev->next = block->next;
+      if (block->next)
+        block->next->prev = block->prev;
+      block = block->prev;
+    }
   if (block->next && block->next->isfree)
-  {
-    block->memsize = block->memsize + block->next->memsize + sizeof(t_memblock);
-    block->next = block->next->next;
-    if (block->next)
-    block->next->prev = block;
-  }
+    {
+      block->memsize = block->memsize +
+        block->next->memsize + sizeof(t_memblock);
+      block->next = block->next->next;
+      if (block->next)
+        block->next->prev = block;
+    }
 }

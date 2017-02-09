@@ -12,7 +12,7 @@
 # define MALLOC_H_
 
 # include <unistd.h>
-#include <stdio.h>
+# include <stdio.h>
 
 typedef struct          s_memblock
 {
@@ -22,7 +22,7 @@ typedef struct          s_memblock
   size_t                isfree;
 }                       t_memblock;
 
-extern t_memblock *g_head;
+extern t_memblock       *g_head;
 
 void    *malloc(size_t size);
 size_t  to_alloc(size_t size);

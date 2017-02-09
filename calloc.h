@@ -12,8 +12,8 @@
 # define CALLOC_H_
 
 # include <unistd.h>
-#include "malloc.h"
+# include "malloc.h"
 
-void *calloc(size_t nelem, size_t elsize);
+void    *calloc(size_t nelem, size_t elsize);
 
 #endif /* !CALLOC_H_ */

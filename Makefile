@@ -17,9 +17,9 @@ CFLAGS	+= -I. -fPIC -Wall -Wextra
 NAME	= libmy_malloc.so
 
 SRCS	= malloc.c \
-				calloc.c \
-				realloc.c \
-				free.c
+	  calloc.c \
+	  realloc.c \
+	  free.c
 
 OBJS	= $(SRCS:.c=.o)
 

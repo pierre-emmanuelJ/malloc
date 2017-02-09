@@ -11,10 +11,10 @@
 #include <string.h>
 #include "realloc.h"
 
-void	*realloc(void *ptr, size_t size)
-{
-  t_memblock  *new_ptr;
-  size_t      sizeblock;
+void            *realloc(void *ptr, size_t size)
+{ 
+  t_memblock    *new_ptr;
+  size_t        sizeblock;
 
   if (!ptr)
     {
@@ -24,7 +24,7 @@ void	*realloc(void *ptr, size_t size)
   if (ptr && !size)
     return (ptr);
   new_ptr = (t_memblock*)ptr;
-  new_ptr = new_ptr -1;
+  new_ptr = new_ptr - 1;
   sizeblock = new_ptr->memsize;
   if (!(new_ptr = malloc(sizeblock + size)))
     return (NULL);

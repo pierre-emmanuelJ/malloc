@@ -11,13 +11,13 @@
 #include "malloc.h"
 #include <stdio.h>
 
-void show_alloc_mem()
+void            show_alloc_mem()
 {
-  t_memblock *block;
+  t_memblock    *block;
 
   printf("break : %p\n", sbrk(0));
   block = g_head;
-  while(block)
+  while (block)
     {
       printf("%p - %p : %lu bytes\n", block + 1,
 	     (char *)(block) + block->memsize + sizeof(t_memblock),
