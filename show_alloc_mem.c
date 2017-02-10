@@ -5,7 +5,7 @@
 ** Login   <jacqui_p@epitech.eu>
 **
 ** Started on  Thu Feb  9 15:01:35 2017 Pierre-Emmanuel Jacquier
-** Last update Thu Feb  9 15:25:11 2017 Pierre-Emmanuel Jacquier
+** Last update Fri Feb 10 16:01:57 2017 Pierre-Emmanuel Jacquier
 */
 
 #include "malloc.h"
@@ -20,7 +20,7 @@ void            show_alloc_mem()
   while (block)
     {
       printf("%p - %p : %lu bytes\n", block + 1,
-	     (char *)(block) + block->memsize + sizeof(t_memblock),
+	     (char *)(block) + block->memsize + META_DATA_SIZE,
 	     block->memsize);
       block = block->next;
     }

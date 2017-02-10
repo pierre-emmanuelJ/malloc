@@ -12,7 +12,7 @@
 #include "realloc.h"
 
 void            *realloc(void *ptr, size_t size)
-{ 
+{
   t_memblock    *new_ptr;
   size_t        sizeblock;
 

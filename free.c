@@ -5,7 +5,7 @@
 ** Login   <jacqui_p@epitech.eu>
 **
 ** Started on  Mon Jan 30 11:07:14 2017 Pierre-Emmanuel Jacquier
-** Last update Thu Feb  9 14:38:22 2017 Pierre-Emmanuel Jacquier
+** Last update Fri Feb 10 15:45:09 2017 Pierre-Emmanuel Jacquier
 */
 
 #include "free.h"
@@ -29,7 +29,7 @@ void    block_fusion(t_memblock *block)
   if (block->prev && block->prev->isfree)
     {
       block->prev->memsize = (block->memsize +
-                              block->prev->memsize + sizeof(t_memblock));
+                              block->prev->memsize + META_DATA_SIZE);
       block->prev->next = block->next;
       if (block->next)
         block->next->prev = block->prev;
@@ -38,7 +38,7 @@ void    block_fusion(t_memblock *block)
   if (block->next && block->next->isfree)
     {
       block->memsize = block->memsize +
-        block->next->memsize + sizeof(t_memblock);
+        block->next->memsize + META_DATA_SIZE;
       block->next = block->next->next;
       if (block->next)
         block->next->prev = block;

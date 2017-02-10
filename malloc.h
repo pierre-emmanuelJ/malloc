@@ -5,7 +5,7 @@
 ** Login   <jacqui_p@epitech.eu>
 **
 ** Started on  Mon Jan 30 11:05:54 2017 Pierre-Emmanuel Jacquier
-** Last update Thu Feb  9 15:12:17 2017 Pierre-Emmanuel Jacquier
+** Last update Fri Feb 10 17:22:52 2017 Pierre-Emmanuel Jacquier
 */
 
 #ifndef MALLOC_H_
@@ -29,5 +29,16 @@ size_t  to_alloc(size_t size);
 void    *add_block(t_memblock *head, size_t size);
 void    *check_block(t_memblock *head, size_t size);
 void    show_alloc_mem();
+
+# define META_DATA_SIZE (sizeof(t_memblock))
+# define SBRK_ERROR ((void*)-1)
+
+# define MULTIPLE_OF(num, mul) (((num) | (mul - 1)) + 1)
+
+# define PAGE_SIZE (sysconf(_SC_PAGESIZE))
+# define WORD sizeof(void*)
+
+# define ALIGN_TO_PAGESIZE(size) MULTIPLE_OF(size, PAGE_SIZE)
+# define ALIGN_BLOCK(size) MULTIPLE_OF(size, WORD)
 
 #endif /* !MALLOC_H_ */
