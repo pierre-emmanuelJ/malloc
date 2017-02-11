@@ -5,9 +5,10 @@
 ** Login   <jacqui_p@epitech.eu>
 **
 ** Started on  Mon Jan 30 10:57:50 2017 Pierre-Emmanuel Jacquier
-** Last update Fri Feb 10 17:12:44 2017 Pierre-Emmanuel Jacquier
+** Last update Sat Feb 11 22:35:05 2017 Pierre-Emmanuel Jacquier
 */
 
+#include <stdint.h>
 #include "malloc.h"
 
 t_memblock      *g_head = NULL;
@@ -86,6 +87,8 @@ void            *malloc(size_t size)
   size_t        alloc_size;
 
   if (!size)
+    return (NULL);
+  if (size == SIZE_MAX)
     return (NULL);
   size = ALIGN_BLOCK(size);
   alloc_size = ALIGN_TO_PAGESIZE(size);
